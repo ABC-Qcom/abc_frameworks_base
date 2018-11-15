@@ -52,4 +52,5 @@
 
   <java-symbol type="bool" name="config_canForceDozeNotifications" />
 
+  <java-symbol type="bool" name="config_oldQtiTelephony" />
 </resources>

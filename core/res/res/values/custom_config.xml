@@ -45,6 +45,9 @@
 
     <bool name="config_canForceDozeNotifications">true</bool>
 
+    <!-- Whether the device has outdated qti-telephony-common.jar -->
+    <bool name="config_oldQtiTelephony">true</bool>
+
     <!-- Whether or not swipe up gesture's opt-in setting is available on this device -->
     <bool name="config_custom_swipe_up_gesture_setting_available">false</bool>
 </resources>
