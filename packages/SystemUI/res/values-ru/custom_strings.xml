@@ -14,8 +14,66 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  -->
-
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Restart -->
+    <string name="global_action_restart_advanced">Дополнительно</string>
+    <string name="global_action_restart_recovery">Восстановление</string>
+    <string name="global_action_restart_bootloader">Загрузчик</string>
+    <string name="global_action_restart_ui">Интерфейс</string>
+
+    <!-- Screenrecord Notification Ticker -->
+    <string name="screenrecord_notif_ticker">Идёт запись экрана</string>
+    <string name="screenrecord_notif_final_ticker">Запись экрана прошла успешно</string>
+    <!-- Screenrecord notification title -->
+    <string name="screenrecord_notif_title">Запись экрана</string>
+    <!-- Screenrecord notification action: Stop -->
+    <string name="screenrecord_notif_stop">Стоп</string>
+    <string name="screenrecord_notif_completed">Запись экрана прошла успешно</string>
+    <!-- Screenrecord notification action: show/hide pointer -->
+    <string name="screenrecord_notif_pointer_on">Вкл. указатель</string>
+    <string name="screenrecord_notif_pointer_off">Откл. указатель</string>
+    <!-- Screen record notification error title -->
+    <string name="screenrecord_notif_error">Невозможно записать экран</string>
+    <string name="notification_channel_screenrecord">Запись экрана</string>
+    <string name="screenrecord_hide_hint">Откл. подсказку</string>
+    <string name="screenrecord_show_hint">Вкл. подсказку</string>
+    <!-- Screenshot QS tile -->
+    <string name="quick_settings_screenrecord_label">Запись экрана</string>
+    <string name="quick_settings_screenrecord_lq_label">Запись экрана 480p</string>
+    <string name="quick_settings_screenrecord_mq_label">Запись экрана 720p</string>
+    <string name="quick_settings_screenrecord_hq_label">Запись экрана 720p+</string>
+
+    <!-- accessibility label for button to open running apps prefscreen [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_running_services">Открыть список работающих приложений.</string>
+
+    <!-- Immersive mode tile -->
+    <string name="quick_settings_immersive_tile">Полноэкр. режим</string>
+    <string name="quick_settings_immersive_tile_off">Полноэкр. режим откл.</string>
+    <string name="quick_settings_immersive_tile_statusbar">Скрыть стр. сост.</string>
+    <string name="quick_settings_immersive_tile_navbar">Скрыть панель нав.</string>
+    <string name="quick_settings_immersive_tile_full">Полноэкр. режим</string>
+
+    <!-- Sound search -->
+    <string name="quick_settings_sound_search">Поиск музыки</string>
+
+    <!-- Caffeine QS Tile -->
+    <string name="quick_settings_caffeine_label">Кофеин</string>
+    <string name="accessibility_quick_settings_caffeine_off">Кофеин выкл.</string>
+    <string name="accessibility_quick_settings_caffeine_on">Кофеин вкл.</string>
+
+    <!-- ADB network tile -->
+    <string name="quick_settings_adb_network">ADB по сети</string>
+    <string name="quick_settings_network_adb_enabled_label">Отладка по сети</string>
+    <string name="quick_settings_network_adb_disabled_label">Отладка по сети</string>
+
+    <!-- Partial screenshot -->
+    <string name="screenshot_abort_title">Снимок экрана не был снят</string>
+    <string name="screenshot_abort_text">Операция отменена.</string>
+
+    <!-- Screenshot QS tile -->
+    <string name="quick_settings_screenshot_label">Снимок экрана</string>
+    <string name="quick_settings_region_screenshot_label">Снимок области</string>
+
     <!-- Statusbar icons -->
     <string name="statusbar_items_title">Редактирование иконок</string>
 </resources>
