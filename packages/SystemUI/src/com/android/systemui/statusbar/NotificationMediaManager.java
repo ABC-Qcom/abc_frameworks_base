@@ -201,7 +201,6 @@ public class NotificationMediaManager implements Dumpable {
                 mMediaController = controller;
                 mMediaController.registerCallback(mMediaListener);
                 mMediaMetadata = mMediaController.getMetadata();
-                setMediaPlaying();
                 if (DEBUG_MEDIA) {
                     Log.v(TAG, "DEBUG_MEDIA: insert listener, found new controller: "
                             + mMediaController + ", receive metadata: " + mMediaMetadata);
@@ -223,6 +222,7 @@ public class NotificationMediaManager implements Dumpable {
         if (metaDataChanged) {
             mEntryManager.updateNotifications();
         }
+        setMediaPlaying();
         mPresenter.updateMediaMetaData(metaDataChanged, true);
     }
 
@@ -310,29 +310,40 @@ public class NotificationMediaManager implements Dumpable {
                 || PlaybackState.STATE_BUFFERING ==
                 getMediaControllerPlaybackState(mMediaController)) {
 
-            ArrayList<NotificationData.Entry> activeNotifications =
-                    mEntryManager.getNotificationData().getAllNotifications();
-            int N = activeNotifications.size();
-            final String pkg = mMediaController.getPackageName();
+            synchronized (mEntryManager.getNotificationData()) {
+                ArrayList<NotificationData.Entry> activeNotifications =
+                        mEntryManager.getNotificationData().getAllNotifications();
+                int N = activeNotifications.size();
+                final String pkg = mMediaController.getPackageName();
 
-            boolean dontPulse = false;
-            if (!mBlacklist.isEmpty() && mBlacklist.contains(pkg)) {
-                // don't play Pulse for this app
-                dontPulse = true;
-            }
-
-            for (int i = 0; i < N; i++) {
-                final NotificationData.Entry entry = activeNotifications.get(i);
-                if (entry.notification.getPackageName().equals(pkg)) {
-                    // NotificationEntryManager onAsyncInflationFinished will get called
-                    // when colors and album are loaded for the notification, then we can send
-                    // those info to Pulse
-                    mEntryManager.setEntryToRefresh(entry, dontPulse);
-                    break;
+                boolean dontPulse = false;
+                if (!mBlacklist.isEmpty() && mBlacklist.contains(pkg)) {
+                    // don't play Pulse for this app
+                    dontPulse = true;
                 }
-            }
-            if (!dontPulse && mListener != null) {
-                mListener.onMediaUpdated(true);
+
+                boolean mediaNotification= false;
+                for (int i = 0; i < N; i++) {
+                    final NotificationData.Entry entry = activeNotifications.get(i);
+                    if (entry.notification.getPackageName().equals(pkg)) {
+                        // NotificationEntryManager onAsyncInflationFinished will get called
+                        // when colors and album are loaded for the notification, then we can send
+                        // those info to Pulse
+                        mEntryManager.setEntryToRefresh(entry, dontPulse);
+                        mediaNotification = true;
+                        break;
+                    }
+                }
+                if (!mediaNotification) {
+                    // no notification for this mediacontroller thus no artwork or track info,
+                    // clean up Ambient Music and Pulse albumart color
+                    mEntryManager.setEntryToRefresh(null, true);
+                    mPresenter.setAmbientMusicInfo(null, null);
+                }
+
+                if (!dontPulse && mListener != null) {
+                    mListener.onMediaUpdated(true);
+                }
             }
         } else {
             mEntryManager.setEntryToRefresh(null, true);
